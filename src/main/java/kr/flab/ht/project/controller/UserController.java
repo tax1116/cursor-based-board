@@ -21,6 +21,11 @@ public class UserController {
         return userService.getUser(id);
     }
 
+    @GetMapping("/test")
+    public String getUser() {
+        return "hello";
+    }
+
     @PostMapping("/users")
     public ResponseEntity signUp(@RequestBody User user) {
         if (user == null || user.getName() == null || user.getAddr() == null) {
