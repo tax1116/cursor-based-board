@@ -1,5 +1,7 @@
 package kr.flab.ht.project.study;
 
+import java.util.Scanner;
+
 public class ControlSwitch {
     public static void main(String[] args){
         ControlSwitch control = new ControlSwitch();
@@ -10,6 +12,18 @@ public class ControlSwitch {
         control.switchStatement(4);
         control.switchStatement(5);
         control.switchStatement(6);
+
+        test2();
+
+        Scanner scan = new Scanner(System.in);
+        System.out.print("입력하세요 : ");
+        String line = scan.nextLine();
+        System.out.println("입력한 문자열 : " + line);
+        scan.close();
+    }
+
+    public static void test2() {
+
     }
 
     public void switchStatement(int numberOfWheel){
@@ -34,5 +48,10 @@ public class ControlSwitch {
                 System.out.println(numberOfWheel+": It is an expensive car.");
                 break;
         }
+        test();
+    }
+
+    public void test() {
+
     }
 }
