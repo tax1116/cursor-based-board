@@ -7,7 +7,7 @@ public class DepositManagement {
     public static CustomerInfo login = new CustomerInfo();
     public static CustomerInfo[] customer = new CustomerInfo[50];//50이라는 숫자는 상수로 선언.
     public static int memberIndex=0;
-
+    public static DepositInfo[][] deposit = new DepositInfo[50][10];
 
     public static void main(String[] args){
         DepositManagement manage = new DepositManagement();
