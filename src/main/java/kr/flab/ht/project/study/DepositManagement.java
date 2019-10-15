@@ -1,5 +1,6 @@
 package kr.flab.ht.project.study;
 
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class DepositManagement {
@@ -7,12 +8,18 @@ public class DepositManagement {
     public static CustomerInfo login = new CustomerInfo();
     public static CustomerInfo[] customer = new CustomerInfo[50];//50이라는 숫자는 상수로 선언.
     public static int memberIndex=0;
-    public static DepositInfo[][] deposit = new DepositInfo[50][10];
+    public static InstallmentSaving[][] saving = new InstallmentSaving[50][10];
+    public static Regular[][] regular = new Regular[50][10];
+    public static int savingIndex=0;
+    public static int regularIndex=0;
+    public static Withdrawal[] withdrawal = new Withdrawal[50];
 
     public static void main(String[] args){
         DepositManagement manage = new DepositManagement();
         MemberManagement member = new MemberManagement();
+        DepositProcess process = new DepositProcess();
         CustomerInfo info = new CustomerInfo();
+
         /*if (member.deleteMember("", "", null) == MemberManagement.DeleteResult.SUCCESS) {
 
         }*/
@@ -100,6 +107,56 @@ public class DepositManagement {
                     break;
 
                 case 5:
+                    System.out.println(customer[loginIndex].name+"님 계좌개설 창구입니다.");
+                    System.out.print("계좌종류를 선택하세요(1. 예금 2. 자유적금 3. 정기적금): ");
+                    byte type = scan.nextByte();
+
+                    if(type == 1) {
+                        if(withdrawal[loginIndex]!=null){
+                            System.out.println("이미 예금계좌가 존재합니다.");
+                        }
+                        else {
+                            withdrawal[loginIndex] = process.createWithdrawal(customer[loginIndex].name, customer[loginIndex].phone);
+                            System.out.println("예금계좌가 개설되었습니다.");
+                            System.out.println(withdrawal[loginIndex].open);
+                            System.out.println(withdrawal[loginIndex].transferLimit);
+                            System.out.println(withdrawal[loginIndex].code);
+                            System.out.println(withdrawal[loginIndex].close);
+                        }
+                    }
+                    else if (type == 2){
+                        if(savingIndex>9){
+                            System.out.println("계좌개설 한도가 초과했습니다.");
+                        }
+                        else {
+                            saving[loginIndex][savingIndex] = process.createSaving(customer[loginIndex].name, customer[loginIndex].phone, savingIndex);
+                            System.out.println(saving[loginIndex][savingIndex].open);
+                            System.out.println(saving[loginIndex][savingIndex].interest);
+                            System.out.println(saving[loginIndex][savingIndex].code);
+                            System.out.println(saving[loginIndex][savingIndex].close);
+                            savingIndex++;
+                        }
+                    }
+                    else if (type == 3) {
+
+                        if (regularIndex > 9) {
+                            System.out.println("계좌개설 한도가 초과했습니다.");
+                        }
+                        else {
+                            regular[loginIndex][regularIndex] = process.createRegular(customer[loginIndex].name, customer[loginIndex].phone, regularIndex);
+                            System.out.println(regular[loginIndex][savingIndex].open);
+                            System.out.println(regular[loginIndex][savingIndex].interest);
+                            System.out.println(regular[loginIndex][savingIndex].code);
+                            System.out.println(regular[loginIndex][savingIndex].close);
+                            System.out.println(regular[loginIndex][savingIndex].month);
+                            regularIndex++;
+                        }
+                    }
+
+                    else {
+                        System.out.println("잘못된 입력입니다.");
+                        select = 5;
+                    }
                     break;
 
                 case 6:

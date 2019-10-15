@@ -1,51 +1,54 @@
 package kr.flab.ht.project.study;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.Date;
 
-public class DepositInfo {
-    String id;
+public class DepositInfo{
+    String name;
     BigDecimal balance;
     String code;
     String passWd;
-    String open;
-    String close;
+    Date open;
+    Date close;
+
 
     public DepositInfo(){
 
     }
 
     public DepositInfo(String id){
-        this.id = id;
+        this.name = id;
     }
 
     public DepositInfo(String id, BigDecimal balance){
-        this.id = id;
+        this.name = id;
         this.balance = balance;
     }
 
     public DepositInfo(String id, BigDecimal balance, String code){
-        this.id = id;
+        this.name = id;
         this.balance = balance;
         this.code = code;
     }
 
     public DepositInfo(String id, BigDecimal balance, String code, String passWd){
-        this.id = id;
+        this.name = id;
         this.balance = balance;
         this.code = code;
         this.passWd = passWd;
     }
 
-    public DepositInfo(String id, BigDecimal balance, String code, String passWd, String open){
-        this.id = id;
+    public DepositInfo(String id, BigDecimal balance, String code, String passWd, Date open){
+        this.name = id;
         this.balance = balance;
         this.code = code;
         this.passWd = passWd;
         this.open = open;
     }
 
-    public DepositInfo(String id, BigDecimal balance, String code, String passWd, String open, String close){
-        this.id = id;
+    public DepositInfo(String id, BigDecimal balance, String code, String passWd, Date open, Date close){
+        this.name = id;
         this.balance = balance;
         this.code = code;
         this.passWd = passWd;
