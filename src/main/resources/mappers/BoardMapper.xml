@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.flab.ht.project.mapper.BoardMapper">
+    <select id="list" resultType="board">
+        SELECT id, author, title
+        FROM board
+        ORDER BY id
+    </select>
+
+    <select id="read" parameterType="int" resultType="board">
+        SELECT id, author, title, content
+        FROM board
+        WHERE id=#{id}
+    </select>
+
+    <insert id="write" parameterType="boardInsert">
+        INSERT INTO board(author, title, content)
+        VALUES(#{author}, #{title}, #{content})
+    </insert>
+
+    <update id="update" parameterType="board">
+        UPDATE board
+        SET title = #{title}
+        , content = #{content}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM board
+        where id=#{id}
+    </delete>
+</mapper>
