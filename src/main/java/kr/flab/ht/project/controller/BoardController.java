@@ -2,49 +2,55 @@ package kr.flab.ht.project.controller;
 
 import kr.flab.ht.project.model.Board;
 import kr.flab.ht.project.model.BoardInsert;
+import kr.flab.ht.project.model.Pagination;
 import kr.flab.ht.project.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/boards")
 public class BoardController {
     private static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);
 
     @Autowired
     BoardService boardService;
 
-    @GetMapping("/list")
-    public List<Board> list(){
-        return boardService.list();
+    @GetMapping("")
+    public ResponseEntity<List<Board>> list(@RequestParam(required = false, defaultValue = "1") int page){
+        int totalList = boardService.getTotalList();
+        Pagination pagination = new Pagination();
+        pagination.pageInfo(page, totalList);
+        return new ResponseEntity<List<Board>>(boardService.list(pagination),HttpStatus.OK);
     }
 
-    @GetMapping("/list/{id}")
-    public Board read(@PathVariable("id") int id) {
-        return boardService.read(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Board> read(@PathVariable("id") int id) {
+        return new ResponseEntity<Board>(boardService.read(id),HttpStatus.OK);
     }
 
-    @PostMapping("/edit")
-    public String write(@RequestBody BoardInsert boardInsert) {
+    @PostMapping("")
+    public ResponseEntity write(@RequestBody BoardInsert boardInsert) {
         boardService.write(boardInsert);
-        return "write success";
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @PutMapping("/edit/{id}")
-    public String update(@PathVariable("id") int id, @RequestBody Board board) {
+    @PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable("id") int id, @RequestBody Board board) {
         board.setId(id);
         boardService.update(board);
-        return "update success";
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") int id){
         boardService.delete(id);
-        return "delete success";
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
 

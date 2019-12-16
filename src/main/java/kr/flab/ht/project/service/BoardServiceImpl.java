@@ -3,9 +3,8 @@ package kr.flab.ht.project.service;
 import kr.flab.ht.project.mapper.BoardMapper;
 import kr.flab.ht.project.model.Board;
 import kr.flab.ht.project.model.BoardInsert;
-import org.springframework.beans.factory.annotation.Autowired;
+import kr.flab.ht.project.model.Pagination;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -21,8 +20,13 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public List<Board> list() {
-        return boardMapper.list();
+    public List<Board> list(Pagination pagination) {
+        return boardMapper.list(pagination);
+    }
+
+    @Override
+    public int getTotalList() {
+        return boardMapper.getTotalList();
     }
 
     @Override
