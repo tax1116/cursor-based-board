@@ -1,24 +1,20 @@
 package kr.flab.ht.project.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BoardInsert {
 
-    private String author;
-    private String title;
-    private String content;
+  private String author;
 
-    public BoardInsert(){
+  private String title;
 
-    }
-
-    public BoardInsert(String author, String title, String content) {
-        this.author = author;
-        this.title = title;
-        this.content = content;
-    }
+  private String content;
 
 }
