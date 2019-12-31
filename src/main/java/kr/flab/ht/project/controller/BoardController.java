@@ -22,14 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/boards")
-public class BoardController {
+public class
+BoardController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(BoardController.class);
 
   @Autowired
   BoardService boardService;
 
-  @GetMapping("")
+  @GetMapping
   public ResponseEntity<List<Board>> list(@RequestParam(required = false,
           defaultValue = "1") int page) {
     int totalList = boardService.getTotalList();
@@ -43,7 +44,7 @@ public class BoardController {
     return new ResponseEntity<Board>(boardService.read(id),HttpStatus.OK);
   }
 
-  @PostMapping("")
+  @PostMapping
   public ResponseEntity write(@RequestBody BoardInsert boardInsert) {
     boardService.write(boardInsert);
     return new ResponseEntity(HttpStatus.CREATED);
@@ -53,7 +54,7 @@ public class BoardController {
   public ResponseEntity update(@PathVariable("id") int id, @RequestBody Board board) {
     board.setId(id);
     boardService.update(board);
-    return new ResponseEntity(HttpStatus.CREATED);
+    return new ResponseEntity(HttpStatus.OK);
   }
 
   @DeleteMapping("/{id}")

@@ -5,8 +5,9 @@
     <select id="list" resultType="kr.flab.ht.project.model.Board">
         SELECT id, author, title
         FROM board
-        ORDER BY id
-        LIMIT #{startList}, #{listSize}
+        WHERE id<![CDATA[<]]>#{cursor}
+        ORDER BY id DESC
+        LIMIT #{listSize}
     </select>
 
     <select id="getTotalList" resultType="int">
