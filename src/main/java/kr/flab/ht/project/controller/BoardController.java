@@ -31,12 +31,16 @@ BoardController {
   BoardService boardService;
 
   @GetMapping
-  public ResponseEntity<List<Board>> list(@RequestParam(required = false,
-          defaultValue = "1") int page) {
+  public ResponseEntity<List<Board>> list(@RequestParam(required = false, defaultValue = "1") int page,
+                                          @RequestParam(required = false) Integer cursor) {
     int totalList = boardService.getTotalList();
     Pagination pagination = new Pagination();
-    pagination.pageInfo(page, totalList);
-    return new ResponseEntity<List<Board>>(boardService.list(pagination),HttpStatus.OK);
+    pagination.pageInfo(page, totalList, cursor);
+
+    if(page == 1){
+      return new ResponseEntity<List<Board>>(boardService.getFirstList(pagination),HttpStatus.OK);
+    }
+    return new ResponseEntity<List<Board>>(boardService.list(pagination), HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
@@ -47,7 +51,7 @@ BoardController {
   @PostMapping
   public ResponseEntity write(@RequestBody BoardInsert boardInsert) {
     boardService.write(boardInsert);
-    return new ResponseEntity(HttpStatus.CREATED);
+    return new ResponseEntity (HttpStatus.CREATED);
   }
 
   @PutMapping("/{id}")

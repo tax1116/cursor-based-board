@@ -11,6 +11,8 @@ public interface BoardService {
 
   List<Board> list(Pagination pagination);
 
+  List<Board> getFirstList(Pagination pagination);
+
   int getTotalList();
 
   void write(BoardInsert boardInsert);

@@ -10,6 +10,14 @@
         LIMIT #{listSize}
     </select>
 
+    <select id="getFirstList" resultType="kr.flab.ht.project.model.Board">
+        SELECT id, author, title
+        FROM board
+        ORDER BY id DESC
+        LIMIT #{listSize}
+    </select>
+
+
     <select id="getTotalList" resultType="int">
         SELECT
         COUNT(*)

@@ -26,9 +26,15 @@ public class BoardServiceImpl implements BoardService {
   }
 
   @Override
+  public List<Board> getFirstList(Pagination pagination) {
+    return boardMapper.getFirstList(pagination);
+  }
+
+  @Override
   public int getTotalList() {
     return boardMapper.getTotalList();
   }
+
 
   @Override
   public void write(BoardInsert boardInsert) {
