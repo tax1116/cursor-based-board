@@ -32,34 +32,31 @@ public class BoardController {
     Pagination pagination = new Pagination();
     pagination.pageInfo(page, totalList, cursor);
 
-    if(page == 1){
-      return new ResponseEntity<List<Board>>(boardService.getFirstList(pagination),HttpStatus.OK);
-    }
-    return new ResponseEntity<List<Board>>(boardService.list(pagination), HttpStatus.OK);
+    return new ResponseEntity<>(boardService.list(pagination), HttpStatus.OK);
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<Board> read(@PathVariable("id") int id) {
-    return new ResponseEntity<Board>(boardService.read(id),HttpStatus.OK);
+    return new ResponseEntity<>(boardService.read(id),HttpStatus.OK);
   }
 
   @PostMapping
-  public ResponseEntity write(@RequestBody BoardInsert boardInsert) {
+  public ResponseEntity<String> write(@RequestBody BoardInsert boardInsert) {
     boardService.write(boardInsert);
-    return new ResponseEntity (HttpStatus.CREATED);
+    return new ResponseEntity<> ("success",HttpStatus.CREATED);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity update(@PathVariable("id") int id, @RequestBody Board board) {
+  public ResponseEntity<String> update(@PathVariable("id") int id, @RequestBody Board board) {
     board.setId(id);
     boardService.update(board);
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity<> ("success",HttpStatus.OK);
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity delete(@PathVariable("id") int id) {
+  public ResponseEntity<String> delete(@PathVariable("id") int id) {
     boardService.delete(id);
-    return new ResponseEntity(HttpStatus.OK);
+    return new ResponseEntity<> ("success",HttpStatus.OK);
   }
 }
 

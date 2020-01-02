@@ -5,18 +5,12 @@
     <select id="list" resultType="kr.flab.ht.project.model.Board">
         SELECT id, author, title
         FROM board
-        WHERE id<![CDATA[<]]>#{cursor}
+        <if test="cursor != null">
+            WHERE id<![CDATA[<]]>#{cursor}
+        </if>
         ORDER BY id DESC
         LIMIT #{listSize}
     </select>
-
-    <select id="getFirstList" resultType="kr.flab.ht.project.model.Board">
-        SELECT id, author, title
-        FROM board
-        ORDER BY id DESC
-        LIMIT #{listSize}
-    </select>
-
 
     <select id="getTotalList" resultType="int">
         SELECT
