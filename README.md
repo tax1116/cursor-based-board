@@ -17,6 +17,7 @@
     GET : localhost:8080/boards/?page=2&cursor=8
 ![](./image/get_1.JPG)
 ![](./image/get_2.JPG)
+    
     <select id="list" resultType="kr.flab.ht.project.model.Board">
         SELECT id, author, title
         FROM board
