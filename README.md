@@ -17,7 +17,16 @@
     GET : localhost:8080/boards/?page=2&cursor=8
 ![](./image/get_1.JPG)
 ![](./image/get_2.JPG)
- * 첫 번째 페이지 요청 시에는 RequestParam로 page만을 가져옵니다.
+    <select id="list" resultType="kr.flab.ht.project.model.Board">
+        SELECT id, author, title
+        FROM board
+        <if test="cursor != null">
+            WHERE id<![CDATA[<]]>#{cursor}
+        </if>
+        ORDER BY id DESC
+        LIMIT #{listSize}
+    </select>
+ * 첫 번째 페이지 요청에는 cursor 값을 지정하지 않으므로 null값이 입력되어 DB의 마지막 행이 입력된다.
  * 두 번째 페이지 요청부터는 이전 페이지의 가장 작은 인덱스를 cursor의 값으로 지정하여 요청합니다.
  ##### 2. 게시물 추가
     POST : localhost:8080/boards/
@@ -30,4 +39,4 @@
 ##### 4. 게시물 수정
     PUT : localhost:8080/boards/
 ![](./image/update.JPG)
- * index를 주입하지 않는 이유는 기본키로 auto_increment 설정을 했기 때문에 DB에 행이 추가되면 자동으로 입력된다.
+  * index를 주입하지 않는 이유는 기본키로 auto_increment 설정을 했기 때문에 DB에 행이 추가되면 자동으로 입력된다.
