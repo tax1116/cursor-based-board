@@ -28,7 +28,7 @@
         LIMIT #{listSize}
     </select>
  * 첫 번째 페이지 요청에는 cursor 값을 지정하지 않으므로 null값이 입력되어 DB의 마지막 행이 입력된다.
- * 두 번째 페이지 요청부터는 이전 페이지의 가장 작은 인덱스를 cursor의 값으로 지정하여 요청합니다.
+ * 두 번째 페이지 요청부터는 이전 페이지의 가장 작은 인덱스를 cursor의 값으로 지정하여 요청한다.
  ##### 2. 게시물 추가
     POST : localhost:8080/boards/
 ![](./image/write.JPG)
@@ -37,7 +37,10 @@
     GET : localhost:8080/boards/11
 ![](./image/read.JPG)
   * 게시물의 Index를 통하여 DB에서 해당 객체를 열람할 수 있다.
-##### 4. 게시물 수정
+ ##### 4. 게시물 수정
     PUT : localhost:8080/boards/
 ![](./image/update.JPG)
   * index를 주입하지 않는 이유는 기본키로 auto_increment 설정을 했기 때문에 DB에 행이 추가되면 자동으로 입력된다.
+ ##### 5. 게시물 삭제
+    DELETE : localhost:8080/boards/11
+  * 요청에 따라 id값에 해당하는 데이터를 삭제한다.
